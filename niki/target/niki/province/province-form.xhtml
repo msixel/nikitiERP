@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui" xmlns:adm="http://github.com/adminfaces" template="#{layoutMB.template}"> 
+    <ui:define name="title">
+         Province #{msg['title.form']} 
+    </ui:define> 
+    <ui:define name="body"> 
+        <f:metadata> 
+            <f:viewParam name="id" value="#{provinceFormMB.id}" converter="javax.faces.Long" /> 
+            <!-- use view action if you are in a Java EE 7 server: <f:viewAction action="#{provinceFormMB.init()}"/>--> 
+            <f:event type="preRenderView" listener="#{provinceFormMB.init}" /> 
+        </f:metadata> 
+        <adm:breadcrumb title="#{empty provinceFormMB.id ? msg['label.new'].concat(' Province') : 'Province '.concat(provinceFormMB.id)}" link="province/province-form.xhtml?id=#{provinceFormMB.id}" /> 
+        <h:form id="form" prependId="false"> 
+            <p:focus context="@form" /> 
+            <p:panel styleClass="box-primary card"> 
+                <div id="main-buttons" class="hidden-sm hidden-xs"> 
+                    <p:commandButton value="#{msg['label.save']}" action="#{provinceFormMB.save}" update="@form" icon="fa fa-check" styleClass="btn-primary" /> 
+                    <p:spacer width="5" rendered="#{provinceFormMB.isNew()}" /> 
+                    <p:commandButton value="#{msg['label.clear']}" action="#{provinceFormMB.clear}" process="@this" icon="fa fa-refresh" styleClass="btn-success" update="@form" rendered="#{provinceFormMB.isNew()}" resetValues="true" /> 
+                    <p:spacer width="5" rendered="#{not provinceFormMB.isNew()}" /> 
+                    <p:commandButton value="#{msg['label.delete']}" action="#{provinceFormMB.remove}" process="@this" rendered="#{not provinceFormMB.isNew()}" icon="fa fa-trash" styleClass="btn-danger"> 
+                        <f:setPropertyActionListener value="true" target="#{facesContext.externalContext.flash.keepMessages}" /> 
+                        <p:confirm header="Confirmation" message="Are you sure?" icon="ui-icon-danger" /> 
+                    </p:commandButton> 
+                    <p:spacer width="5" /> 
+                    <p:commandButton value="#{msg['label.back']}" immediate="true" action="/province/province-list?faces-redirect=true" process="@this" icon="fa fa-reply" /> 
+                </div> 
+                <p:splitButton value="#{msg['label.save']}" action="#{provinceFormMB.save}" update="@form" icon="fa fa-check" styleClass="hidden-md hidden-lg btn-primary"> 
+                    <p:menuitem value="#{msg['label.clear']}" action="#{provinceFormMB.clear}" process="@this" update="@form" rendered="#{provinceFormMB.isNew()}" resetValues="true" icon="fa fa-refresh" /> 
+                    <p:menuitem value="#{msg['label.delete']}" action="#{provinceFormMB.remove}" process="@this" rendered="#{not provinceFormMB.isNew()}" icon="fa fa-trash"> 
+                        <f:setPropertyActionListener value="true" target="#{facesContext.externalContext.flash.keepMessages}" /> 
+                        <p:confirm header="Confirmation" message="Are you sure?" icon="ui-icon-danger" /> 
+                    </p:menuitem> 
+                    <p:separator /> 
+                    <p:menuitem value="#{msg['label.back']}" action="/province/province-list?faces-redirect=true" process="@this" immediate="true" icon="fa fa-reply" /> 
+                </p:splitButton> 
+                <hr /> 
+                <div class="ui-g ui-fluid"> 
+                    <div class="ui-sm-12 ui-g-6 ui-g-nopad"> 
+                        <div class="ui-sm-12 ui-g-11"> 
+                            <p:outputLabel for="id" value="Id" /> 
+                        </div> 
+                        <div class="ui-sm-12 ui-g-11"> 
+                            <p:inputText id="id" value="#{provinceFormMB.entity.id}" readonly="true" styleClass="form-control ui-state-disabled" style="width: 100%" /> 
+                            <span class="help-block"> 
+                                <p:message for="id" /> </span> 
+                        </div> 
+                    </div> 
+                    <div class="ui-sm-12 ui-g-6 ui-g-nopad"> 
+                        <div class="ui-sm-12 ui-g-11"> 
+                            <p:outputLabel for="code" value="Code" /> 
+                        </div> 
+                        <div class="ui-sm-12 ui-g-11"> 
+                            <p:inputText id="code" value="#{provinceFormMB.entity.code}" maxlength="2" required="true" requiredMessage="Code #{msg['label.is-required']}." /> 
+                            <span class="help-block"> 
+                                <p:message for="code" /> </span> 
+                        </div> 
+                    </div> 
+                    <div class="ui-sm-12 ui-g-6 ui-g-nopad"> 
+                        <div class="ui-sm-12 ui-g-11"> 
+                            <p:outputLabel for="name" value="Name" /> 
+                        </div> 
+                        <div class="ui-sm-12 ui-g-11"> 
+                            <p:inputText id="name" value="#{provinceFormMB.entity.name}" maxlength="63" required="true" requiredMessage="Name #{msg['label.is-required']}." /> 
+                            <span class="help-block"> 
+                                <p:message for="name" /> </span> 
+                        </div> 
+                    </div> 
+                    <div class="ui-sm-12 ui-g-6 ui-g-nopad"> 
+                        <div class="ui-sm-12 ui-g-11"> 
+                            <p:outputLabel for="country" value="Country" /> 
+                        </div> 
+                        <div class="ui-sm-12 ui-g-11"> 
+                            <p:autoComplete id="country" value="#{provinceFormMB.entity.country}" completeMethod="#{provinceFormMB.completeCountry}" minQueryLength="2" dropdown="true" var="country" itemLabel="#{country.code}" itemValue="#{country}" converter="entityConverter" /> 
+                            <span class="help-block"> 
+                                <p:message for="country" /> </span> 
+                        </div> 
+                    </div> 
+                    <h:panelGroup id="footer" layout="block" styleClass="hidden-sm hidden-md hidden-lg"> 
+                        <hr /> 
+                        <p:splitButton value="#{msg['label.save']}" action="#{provinceFormMB.save}" update="@form" icon="fa fa-check" styleClass="hidden-md hidden-lg btn-primary"> 
+                            <p:menuitem value="#{msg['label.clear']}" action="#{provinceFormMB.clear}" process="@this" update="@form" rendered="#{provinceFormMB.isNew()}" resetValues="true" icon="fa fa-refresh" /> 
+                            <p:menuitem value="#{msg['label.delete']}" action="#{provinceFormMB.remove}" process="@this" rendered="#{not provinceFormMB.isNew()}" icon="fa fa-trash"> 
+                                <f:setPropertyActionListener value="true" target="#{facesContext.externalContext.flash.keepMessages}" /> 
+                                <p:confirm header="Confirmation" message="Are you sure?" icon="ui-icon-danger" /> 
+                            </p:menuitem> 
+                            <p:separator /> 
+                            <p:menuitem value="#{msg['label.back']}" action="/province/province-list?faces-redirect=true" process="@this" immediate="true" icon="fa fa-reply" /> 
+                        </p:splitButton> 
+                    </h:panelGroup> 
+                </div>
+            </p:panel> 
+            <p:confirmDialog global="true" showEffect="fade" hideEffect="fade" styleClass="box-danger box-solid"> 
+                <p:commandButton value="#{msg['label.yes']}" type="button" styleClass="btn-material btn-primary ui-confirmdialog-yes" icon="fa fa-check" /> 
+                <p:commandButton value="#{msg['label.no']}" type="button" styleClass="btn-material btn-danger ui-confirmdialog-no" icon="fa fa-close" /> 
+            </p:confirmDialog> 
+        </h:form> 
+    </ui:define> 
+</ui:composition>

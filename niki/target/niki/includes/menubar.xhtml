@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui"> 
+    <ul class="nav navbar-nav"> 
+        <li> 
+            <p:link href="/index.xhtml" onclick="clearBreadCrumbs()"> 
+                <i class="fa fa-home"></i> 
+                <span>Home</span> 
+            </p:link> </li> 
+        <li id="menuCity" class="dropdown"> <a href="#" class="dropdown-toggle" data-toggle="dropdown">Citys <span class="caret"></span> <i class="fa fa-circle-o"></i> </a> 
+            <ul class="dropdown-menu" role="menu"> 
+                <li> 
+                    <p:link outcome="/city/city-list.xhtml"> 
+                        <span>List citys</span> 
+                        <i class="fa fa-th-list"></i> 
+                    </p:link> </li> 
+                <li> 
+                    <p:link outcome="/city/city-form.xhtml"> 
+                        <span>New city</span> 
+                        <i class="fa fa-plus-circle"></i> 
+                    </p:link> </li> 
+            </ul> </li> 
+        <li id="menuCompany" class="dropdown"> <a href="#" class="dropdown-toggle" data-toggle="dropdown">Companys <span class="caret"></span> <i class="fa fa-circle-o"></i> </a> 
+            <ul class="dropdown-menu" role="menu"> 
+                <li> 
+                    <p:link outcome="/company/company-list.xhtml"> 
+                        <span>List companys</span> 
+                        <i class="fa fa-th-list"></i> 
+                    </p:link> </li> 
+                <li> 
+                    <p:link outcome="/company/company-form.xhtml"> 
+                        <span>New company</span> 
+                        <i class="fa fa-plus-circle"></i> 
+                    </p:link> </li> 
+            </ul> </li> 
+        <li id="menuCountry" class="dropdown"> <a href="#" class="dropdown-toggle" data-toggle="dropdown">Countrys <span class="caret"></span> <i class="fa fa-circle-o"></i> </a> 
+            <ul class="dropdown-menu" role="menu"> 
+                <li> 
+                    <p:link outcome="/country/country-list.xhtml"> 
+                        <span>List countrys</span> 
+                        <i class="fa fa-th-list"></i> 
+                    </p:link> </li> 
+                <li> 
+                    <p:link outcome="/country/country-form.xhtml"> 
+                        <span>New country</span> 
+                        <i class="fa fa-plus-circle"></i> 
+                    </p:link> </li> 
+            </ul> </li> 
+        <li id="menuEmployee" class="dropdown"> <a href="#" class="dropdown-toggle" data-toggle="dropdown">Employees <span class="caret"></span> <i class="fa fa-circle-o"></i> </a> 
+            <ul class="dropdown-menu" role="menu"> 
+                <li> 
+                    <p:link outcome="/employee/employee-list.xhtml"> 
+                        <span>List employees</span> 
+                        <i class="fa fa-th-list"></i> 
+                    </p:link> </li> 
+                <li> 
+                    <p:link outcome="/employee/employee-form.xhtml"> 
+                        <span>New employee</span> 
+                        <i class="fa fa-plus-circle"></i> 
+                    </p:link> </li> 
+            </ul> </li> 
+        <li id="menuFacility" class="dropdown"> <a href="#" class="dropdown-toggle" data-toggle="dropdown">Facilitys <span class="caret"></span> <i class="fa fa-circle-o"></i> </a> 
+            <ul class="dropdown-menu" role="menu"> 
+                <li> 
+                    <p:link outcome="/facility/facility-list.xhtml"> 
+                        <span>List facilitys</span> 
+                        <i class="fa fa-th-list"></i> 
+                    </p:link> </li> 
+                <li> 
+                    <p:link outcome="/facility/facility-form.xhtml"> 
+                        <span>New facility</span> 
+                        <i class="fa fa-plus-circle"></i> 
+                    </p:link> </li> 
+            </ul> </li> 
+        <li id="menuNeighborhood" class="dropdown"> <a href="#" class="dropdown-toggle" data-toggle="dropdown">Neighborhoods <span class="caret"></span> <i class="fa fa-circle-o"></i> </a> 
+            <ul class="dropdown-menu" role="menu"> 
+                <li> 
+                    <p:link outcome="/neighborhood/neighborhood-list.xhtml"> 
+                        <span>List neighborhoods</span> 
+                        <i class="fa fa-th-list"></i> 
+                    </p:link> </li> 
+                <li> 
+                    <p:link outcome="/neighborhood/neighborhood-form.xhtml"> 
+                        <span>New neighborhood</span> 
+                        <i class="fa fa-plus-circle"></i> 
+                    </p:link> </li> 
+            </ul> </li> 
+        <li id="menuPosition" class="dropdown"> <a href="#" class="dropdown-toggle" data-toggle="dropdown">Positions <span class="caret"></span> <i class="fa fa-circle-o"></i> </a> 
+            <ul class="dropdown-menu" role="menu"> 
+                <li> 
+                    <p:link outcome="/position/position-list.xhtml"> 
+                        <span>List positions</span> 
+                        <i class="fa fa-th-list"></i> 
+                    </p:link> </li> 
+                <li> 
+                    <p:link outcome="/position/position-form.xhtml"> 
+                        <span>New position</span> 
+                        <i class="fa fa-plus-circle"></i> 
+                    </p:link> </li> 
+            </ul> </li> 
+        <li id="menuProvince" class="dropdown"> <a href="#" class="dropdown-toggle" data-toggle="dropdown">Provinces <span class="caret"></span> <i class="fa fa-circle-o"></i> </a> 
+            <ul class="dropdown-menu" role="menu"> 
+                <li> 
+                    <p:link outcome="/province/province-list.xhtml"> 
+                        <span>List provinces</span> 
+                        <i class="fa fa-th-list"></i> 
+                    </p:link> </li> 
+                <li> 
+                    <p:link outcome="/province/province-form.xhtml"> 
+                        <span>New province</span> 
+                        <i class="fa fa-plus-circle"></i> 
+                    </p:link> </li> 
+            </ul> </li> 
+        <li id="menuSchedule" class="dropdown"> <a href="#" class="dropdown-toggle" data-toggle="dropdown">Schedules <span class="caret"></span> <i class="fa fa-circle-o"></i> </a> 
+            <ul class="dropdown-menu" role="menu"> 
+                <li> 
+                    <p:link outcome="/schedule/schedule-list.xhtml"> 
+                        <span>List schedules</span> 
+                        <i class="fa fa-th-list"></i> 
+                    </p:link> </li> 
+                <li> 
+                    <p:link outcome="/schedule/schedule-form.xhtml"> 
+                        <span>New schedule</span> 
+                        <i class="fa fa-plus-circle"></i> 
+                    </p:link> </li> 
+            </ul> </li> 
+    </ul> 
+</ui:composition>

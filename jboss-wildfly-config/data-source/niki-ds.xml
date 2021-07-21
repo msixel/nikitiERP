@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<datasources>
+    <datasource jndi-name="java:/NikiDS" enabled="true" pool-name="NikiDS">
+        <connection-url>jdbc:mysql://database-niki-1.czknq793bnsy.us-west-2.rds.amazonaws.com:3306/niki</connection-url>
+        <driver-class>com.mysql.cj.jdbc.Driver</driver-class>
+        <driver>mysql-connector-java-8.0.22.jar</driver>
+        <security>
+            <user-name>nikiusr</user-name>
+            <password>nikipass</password>
+        </security>
+        <validation>
+            <valid-connection-checker class-name="org.jboss.jca.adapters.jdbc.extensions.mysql.MySQLValidConnectionChecker"/>
+            <background-validation>true</background-validation>
+            <exception-sorter class-name="org.jboss.jca.adapters.jdbc.extensions.mysql.MySQLExceptionSorter"/>
+        </validation>
+    </datasource>  
+</datasources>

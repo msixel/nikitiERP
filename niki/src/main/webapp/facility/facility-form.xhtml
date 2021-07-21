@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui" xmlns:adm="http://github.com/adminfaces" template="#{layoutMB.template}"> 
+    <ui:define name="title">
+         Facility #{msg['title.form']} 
+    </ui:define> 
+    <ui:define name="body"> 
+        <f:metadata> 
+            <f:viewParam name="id" value="#{facilityFormMB.id}" converter="javax.faces.Long" /> 
+            <!-- use view action if you are in a Java EE 7 server: <f:viewAction action="#{facilityFormMB.init()}"/>--> 
+            <f:event type="preRenderView" listener="#{facilityFormMB.init}" /> 
+        </f:metadata> 
+        <adm:breadcrumb title="#{empty facilityFormMB.id ? msg['label.new'].concat(' Facility') : 'Facility '.concat(facilityFormMB.id)}" link="facility/facility-form.xhtml?id=#{facilityFormMB.id}" /> 
+        <h:form id="form" prependId="false"> 
+            <p:focus context="@form" /> 
+            <p:panel styleClass="box-primary card"> 
+                <div id="main-buttons" class="hidden-sm hidden-xs"> 
+                    <p:commandButton value="#{msg['label.save']}" action="#{facilityFormMB.save}" update="@form" icon="fa fa-check" styleClass="btn-primary" /> 
+                    <p:spacer width="5" rendered="#{facilityFormMB.isNew()}" /> 
+                    <p:commandButton value="#{msg['label.clear']}" action="#{facilityFormMB.clear}" process="@this" icon="fa fa-refresh" styleClass="btn-success" update="@form" rendered="#{facilityFormMB.isNew()}" resetValues="true" /> 
+                    <p:spacer width="5" rendered="#{not facilityFormMB.isNew()}" /> 
+                    <p:commandButton value="#{msg['label.delete']}" action="#{facilityFormMB.remove}" process="@this" rendered="#{not facilityFormMB.isNew()}" icon="fa fa-trash" styleClass="btn-danger"> 
+                        <f:setPropertyActionListener value="true" target="#{facesContext.externalContext.flash.keepMessages}" /> 
+                        <p:confirm header="Confirmation" message="Are you sure?" icon="ui-icon-danger" /> 
+                    </p:commandButton> 
+                    <p:spacer width="5" /> 
+                    <p:commandButton value="#{msg['label.back']}" immediate="true" action="/facility/facility-list?faces-redirect=true" process="@this" icon="fa fa-reply" /> 
+                </div> 
+                <p:splitButton value="#{msg['label.save']}" action="#{facilityFormMB.save}" update="@form" icon="fa fa-check" styleClass="hidden-md hidden-lg btn-primary"> 
+                    <p:menuitem value="#{msg['label.clear']}" action="#{facilityFormMB.clear}" process="@this" update="@form" rendered="#{facilityFormMB.isNew()}" resetValues="true" icon="fa fa-refresh" /> 
+                    <p:menuitem value="#{msg['label.delete']}" action="#{facilityFormMB.remove}" process="@this" rendered="#{not facilityFormMB.isNew()}" icon="fa fa-trash"> 
+                        <f:setPropertyActionListener value="true" target="#{facesContext.externalContext.flash.keepMessages}" /> 
+                        <p:confirm header="Confirmation" message="Are you sure?" icon="ui-icon-danger" /> 
+                    </p:menuitem> 
+                    <p:separator /> 
+                    <p:menuitem value="#{msg['label.back']}" action="/facility/facility-list?faces-redirect=true" process="@this" immediate="true" icon="fa fa-reply" /> 
+                </p:splitButton> 
+                <hr /> 
+                <div class="ui-g ui-fluid"> 
+                    <div class="ui-sm-12 ui-g-6 ui-g-nopad"> 
+                        <div class="ui-sm-12 ui-g-11"> 
+                            <p:outputLabel for="id" value="Id" /> 
+                        </div> 
+                        <div class="ui-sm-12 ui-g-11"> 
+                            <p:inputText id="id" value="#{facilityFormMB.entity.id}" readonly="true" styleClass="form-control ui-state-disabled" style="width: 100%" /> 
+                            <span class="help-block"> 
+                                <p:message for="id" /> </span> 
+                        </div> 
+                    </div> 
+                    <div class="ui-sm-12 ui-g-6 ui-g-nopad"> 
+                        <div class="ui-sm-12 ui-g-11"> 
+                            <p:outputLabel for="name" value="Name" /> 
+                        </div> 
+                        <div class="ui-sm-12 ui-g-11"> 
+                            <p:inputText id="name" value="#{facilityFormMB.entity.name}" maxlength="63" required="true" requiredMessage="Name #{msg['label.is-required']}." /> 
+                            <span class="help-block"> 
+                                <p:message for="name" /> </span> 
+                        </div> 
+                    </div> 
+                    <div class="ui-sm-12 ui-g-6 ui-g-nopad"> 
+                        <div class="ui-sm-12 ui-g-11"> 
+                            <p:outputLabel for="description" value="Description" /> 
+                        </div> 
+                        <div class="ui-sm-12 ui-g-11"> 
+                            <p:inputText id="description" value="#{facilityFormMB.entity.description}" maxlength="100" /> 
+                            <span class="help-block"> 
+                                <p:message for="description" /> </span> 
+                        </div> 
+                    </div> 
+                    <div class="ui-sm-12 ui-g-6 ui-g-nopad"> 
+                        <div class="ui-sm-12 ui-g-11"> 
+                            <p:outputLabel for="landline" value="Landline" /> 
+                        </div> 
+                        <div class="ui-sm-12 ui-g-11"> 
+                            <p:inputText id="landline" value="#{facilityFormMB.entity.landline}" maxlength="15" /> 
+                            <span class="help-block"> 
+                                <p:message for="landline" /> </span> 
+                        </div> 
+                    </div> 
+                    <div class="ui-sm-12 ui-g-6 ui-g-nopad"> 
+                        <div class="ui-sm-12 ui-g-11"> 
+                            <p:outputLabel for="cellphone" value="Cellphone" /> 
+                        </div> 
+                        <div class="ui-sm-12 ui-g-11"> 
+                            <p:inputText id="cellphone" value="#{facilityFormMB.entity.cellphone}" maxlength="15" /> 
+                            <span class="help-block"> 
+                                <p:message for="cellphone" /> </span> 
+                        </div> 
+                    </div> 
+                    <div class="ui-sm-12 ui-g-6 ui-g-nopad"> 
+                        <div class="ui-sm-12 ui-g-11"> 
+                            <p:outputLabel for="email" value="Email" /> 
+                        </div> 
+                        <div class="ui-sm-12 ui-g-11"> 
+                            <p:inputText id="email" value="#{facilityFormMB.entity.email}" maxlength="31" /> 
+                            <span class="help-block"> 
+                                <p:message for="email" /> </span> 
+                        </div> 
+                    </div> 
+                    <div class="ui-sm-12 ui-g-6 ui-g-nopad"> 
+                        <div class="ui-sm-12 ui-g-11"> 
+                            <p:outputLabel for="postalCode" value="PostalCode" /> 
+                        </div> 
+                        <div class="ui-sm-12 ui-g-11"> 
+                            <p:inputText id="postalCode" value="#{facilityFormMB.entity.postalCode}" maxlength="9" required="true" requiredMessage="PostalCode #{msg['label.is-required']}." /> 
+                            <span class="help-block"> 
+                                <p:message for="postalCode" /> </span> 
+                        </div> 
+                    </div> 
+                    <div class="ui-sm-12 ui-g-6 ui-g-nopad"> 
+                        <div class="ui-sm-12 ui-g-11"> 
+                            <p:outputLabel for="street" value="Street" /> 
+                        </div> 
+                        <div class="ui-sm-12 ui-g-11"> 
+                            <p:inputTextarea id="street" value="#{facilityFormMB.entity.street}" rows="3" cols="20" counter="streetDisplay" maxlength="127" counterTemplate="{0} #{msg['label.remaining-chars']}" autoResize="true" /> 
+                            <span class="help-block"> 
+                                <h:outputText id="streetDisplay" /> 
+                                <p:message for="street" /> </span> 
+                        </div> 
+                    </div> 
+                    <div class="ui-sm-12 ui-g-6 ui-g-nopad"> 
+                        <div class="ui-sm-12 ui-g-11"> 
+                            <p:outputLabel for="houseNumber" value="HouseNumber" /> 
+                        </div> 
+                        <div class="ui-sm-12 ui-g-11"> 
+                            <p:inputText id="houseNumber" value="#{facilityFormMB.entity.houseNumber}" maxlength="31" required="true" requiredMessage="HouseNumber #{msg['label.is-required']}." /> 
+                            <span class="help-block"> 
+                                <p:message for="houseNumber" /> </span> 
+                        </div> 
+                    </div> 
+                    <div class="ui-sm-12 ui-g-6 ui-g-nopad"> 
+                        <div class="ui-sm-12 ui-g-11"> 
+                            <p:outputLabel for="complement" value="Complement" /> 
+                        </div> 
+                        <div class="ui-sm-12 ui-g-11"> 
+                            <p:inputText id="complement" value="#{facilityFormMB.entity.complement}" maxlength="31" required="true" requiredMessage="Complement #{msg['label.is-required']}." /> 
+                            <span class="help-block"> 
+                                <p:message for="complement" /> </span> 
+                        </div> 
+                    </div> 
+                    <div class="ui-sm-12 ui-g-6 ui-g-nopad"> 
+                        <div class="ui-sm-12 ui-g-11"> 
+                            <p:outputLabel for="country" value="Country" /> 
+                        </div> 
+                        <div class="ui-sm-12 ui-g-11"> 
+                            <p:autoComplete id="country" value="#{facilityFormMB.entity.country}" completeMethod="#{facilityFormMB.completeCountry}" minQueryLength="2" dropdown="true" var="country" itemLabel="#{country.code}" itemValue="#{country}" converter="entityConverter" /> 
+                            <span class="help-block"> 
+                                <p:message for="country" /> </span> 
+                        </div> 
+                    </div> 
+                    <div class="ui-sm-12 ui-g-6 ui-g-nopad"> 
+                        <div class="ui-sm-12 ui-g-11"> 
+                            <p:outputLabel for="province" value="Province" /> 
+                        </div> 
+                        <div class="ui-sm-12 ui-g-11"> 
+                            <p:autoComplete id="province" value="#{facilityFormMB.entity.province}" completeMethod="#{facilityFormMB.completeProvince}" minQueryLength="2" dropdown="true" var="province" itemLabel="#{province.code}" itemValue="#{province}" converter="entityConverter" /> 
+                            <span class="help-block"> 
+                                <p:message for="province" /> </span> 
+                        </div> 
+                    </div> 
+                    <div class="ui-sm-12 ui-g-6 ui-g-nopad"> 
+                        <div class="ui-sm-12 ui-g-11"> 
+                            <p:outputLabel for="city" value="City" /> 
+                        </div> 
+                        <div class="ui-sm-12 ui-g-11"> 
+                            <p:autoComplete id="city" value="#{facilityFormMB.entity.city}" completeMethod="#{facilityFormMB.completeCity}" minQueryLength="2" dropdown="true" var="city" itemLabel="#{city.name}" itemValue="#{city}" converter="entityConverter" /> 
+                            <span class="help-block"> 
+                                <p:message for="city" /> </span> 
+                        </div> 
+                    </div> 
+                    <div class="ui-sm-12 ui-g-6 ui-g-nopad"> 
+                        <div class="ui-sm-12 ui-g-11"> 
+                            <p:outputLabel for="neighborhood" value="Neighborhood" /> 
+                        </div> 
+                        <div class="ui-sm-12 ui-g-11"> 
+                            <p:autoComplete id="neighborhood" value="#{facilityFormMB.entity.neighborhood}" completeMethod="#{facilityFormMB.completeNeighborhood}" minQueryLength="2" dropdown="true" var="neighborhood" itemLabel="#{neighborhood.name}" itemValue="#{neighborhood}" converter="entityConverter" /> 
+                            <span class="help-block"> 
+                                <p:message for="neighborhood" /> </span> 
+                        </div> 
+                    </div> 
+                    <div class="ui-sm-12 ui-g-6 ui-g-nopad"> 
+                        <div class="ui-sm-12 ui-g-11"> 
+                            <p:outputLabel for="companies" value="Companies" /> 
+                        </div> 
+                        <div class="ui-sm-12 ui-g-11"> 
+                            <p:selectCheckboxMenu id="companies" value="#{facilityFormMB.entity.companies}" label="Companies" multiple="true" filter="true" filterMatchMode="contains" converter="entityConverter"> 
+                                <f:attribute name="collectionType" value="java.util.HashSet" /> 
+                                <f:selectItems value="#{allCompanies}" var="item" itemLabel="#{item.name}" itemValue="#{item}" /> 
+                            </p:selectCheckboxMenu> 
+                            <span class="help-block"> 
+                                <p:message for="companies" /> </span> 
+                        </div> 
+                    </div> 
+                    <div class="ui-sm-12 ui-g-6 ui-g-nopad"> 
+                        <div class="ui-sm-12 ui-g-11"> 
+                            <p:outputLabel for="employees" value="Employees" /> 
+                        </div> 
+                        <div class="ui-sm-12 ui-g-11"> 
+                            <p:selectCheckboxMenu id="employees" value="#{facilityFormMB.entity.employees}" label="Employees" multiple="true" filter="true" filterMatchMode="contains" converter="entityConverter"> 
+                                <f:attribute name="collectionType" value="java.util.HashSet" /> 
+                                <f:selectItems value="#{allEmployees}" var="item" itemLabel="#{item.name}" itemValue="#{item}" /> 
+                            </p:selectCheckboxMenu> 
+                            <span class="help-block"> 
+                                <p:message for="employees" /> </span> 
+                        </div> 
+                    </div> 
+                    <h:panelGroup id="footer" layout="block" styleClass="hidden-sm hidden-md hidden-lg"> 
+                        <hr /> 
+                        <p:splitButton value="#{msg['label.save']}" action="#{facilityFormMB.save}" update="@form" icon="fa fa-check" styleClass="hidden-md hidden-lg btn-primary"> 
+                            <p:menuitem value="#{msg['label.clear']}" action="#{facilityFormMB.clear}" process="@this" update="@form" rendered="#{facilityFormMB.isNew()}" resetValues="true" icon="fa fa-refresh" /> 
+                            <p:menuitem value="#{msg['label.delete']}" action="#{facilityFormMB.remove}" process="@this" rendered="#{not facilityFormMB.isNew()}" icon="fa fa-trash"> 
+                                <f:setPropertyActionListener value="true" target="#{facesContext.externalContext.flash.keepMessages}" /> 
+                                <p:confirm header="Confirmation" message="Are you sure?" icon="ui-icon-danger" /> 
+                            </p:menuitem> 
+                            <p:separator /> 
+                            <p:menuitem value="#{msg['label.back']}" action="/facility/facility-list?faces-redirect=true" process="@this" immediate="true" icon="fa fa-reply" /> 
+                        </p:splitButton> 
+                    </h:panelGroup> 
+                </div>
+            </p:panel> 
+            <p:confirmDialog global="true" showEffect="fade" hideEffect="fade" styleClass="box-danger box-solid"> 
+                <p:commandButton value="#{msg['label.yes']}" type="button" styleClass="btn-material btn-primary ui-confirmdialog-yes" icon="fa fa-check" /> 
+                <p:commandButton value="#{msg['label.no']}" type="button" styleClass="btn-material btn-danger ui-confirmdialog-no" icon="fa fa-close" /> 
+            </p:confirmDialog> 
+        </h:form> 
+    </ui:define> 
+</ui:composition>
